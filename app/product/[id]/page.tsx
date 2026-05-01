@@ -50,23 +50,23 @@ export function ProductDetailsPage() {
   const fetchProductData = useCallback(() => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const foundProduct = itemsWithId.find(item => item.id === id);
-      
+
       if (!foundProduct) {
         setError('Product not found');
         setLoading(false);
         return;
       }
-      
+
       setProduct(foundProduct);
-      
+
       const sameCategoryProducts = groupedData[foundProduct.category] || [];
       const related = sameCategoryProducts
         .filter(item => item.id !== foundProduct.id)
         .slice(0, 4);
-      
+
       setRelatedProducts(related);
     } catch (err) {
       setError('Failed to load product details');
@@ -89,7 +89,7 @@ export function ProductDetailsPage() {
 
   return (
     <>
-   
+
       <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8">
         <div className="container mx-auto px-4 z-10">
           <div className="flex items-center justify-between">
@@ -122,7 +122,7 @@ export function ProductDetailsPage() {
               Home
             </Link>
             <span className="text-gray-400">/</span>
-            <Link    href={`/product?categories=${encodeURIComponent(product.category)}`} className="text-gray-600 hover:text-gray-900">
+            <Link href={`/product?categories=${encodeURIComponent(product.category)}`} className="text-gray-600 hover:text-gray-900">
               {product.category}
             </Link>
             <span className="text-gray-400">/</span>
@@ -134,7 +134,7 @@ export function ProductDetailsPage() {
       <div className="bg-gradient-to-br from-gray-50 to-gray-100 pb-4">
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
-     
+
             <div className="lg:col-span-5 space-y-4">
               <div className="sticky top-32">
                 <ProductImages images={product.image} productName={product.itemname} />
@@ -168,7 +168,7 @@ export function ProductDetailsPage() {
                 </span>
               </div>
 
-             
+
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h3 className="font-semibold text-lg mb-4 text-gray-900">Specifications</h3>
                 <div className="space-y-3">
@@ -210,68 +210,68 @@ export function ProductDetailsPage() {
                     <dt className="text-gray-600">Category</dt>
                     <dd className="font-medium capitalize text-gray-900">{product.category}</dd>
                   </div>
-                <div className="mb-6">
-                  <div className="flex items-center text-green-600 font-semibold mb-2">
-                    <Check className="w-5 h-5 mr-2" />
-                    In Stock
-                  </div>
-                  <div className="text-3xl font-bold text-gray-900 mt-4">
-                    ${getPriceFromId(product.id).toFixed(2)}
+                  <div className="mb-6">
+                    <div className="flex items-center text-green-600 font-semibold mb-2">
+                      <Check className="w-5 h-5 mr-2" />
+                      In Stock
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900 mt-4">
+                      ${getPriceFromId(product.id).toFixed(2)}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-      
-            <div className="lg:col-span-3">
-              <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg sticky top-32">
-                <div className="mb-6">
-                  <div className="flex items-center text-green-600 font-semibold mb-2">
-                    <Check className="w-5 h-5 mr-2" />
-                    In Stock
+ </div>
+              <div className="lg:col-span-3">
+                <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg sticky top-32">
+                  <div className="mb-6">
+                    <div className="flex items-center text-green-600 font-semibold mb-2">
+                      <Check className="w-5 h-5 mr-2" />
+                      In Stock
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900 mt-4">
+                      ${price}
+                    </div>
                   </div>
-                  <div className="text-3xl font-bold text-gray-900 mt-4">
-                  ${price}
-                  </div>
-                </div>
 
-                <Button className="w-full py-3 text-lg mb-3">
-                  Add to Cart
-                </Button>
+                  <Button className="w-full py-3 text-lg mb-3">
+                    Add to Cart
+                  </Button>
 
-                <Button variant="outline" className="w-full py-3 text-lg">
-                  Buy Now
-                </Button>
+                  <Button variant="outline" className="w-full py-3 text-lg">
+                    Buy Now
+                  </Button>
 
-                <div className="mt-6 pt-6 border-t space-y-3 text-sm">
-                  <div className="flex items-center text-gray-600">
-                    <Shield className="w-5 h-5 text-gray-600 mr-3" />
-                    <span>Secure transaction</span>
+                  <div className="mt-6 pt-6 border-t space-y-3 text-sm">
+                    <div className="flex items-center text-gray-600">
+                      <Shield className="w-5 h-5 text-gray-600 mr-3" />
+                      <span>Secure transaction</span>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <Truck className="w-5 h-5 text-gray-600 mr-3" />
+                      <span>Ships from Warehouse</span>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <RotateCcw className="w-5 h-5 text-gray-600 mr-3" />
+                      <span>30-day return policy</span>
+                    </div>
                   </div>
-                  <div className="flex items-center text-gray-600">
-                    <Truck className="w-5 h-5 text-gray-600 mr-3" />
-                    <span>Ships from Warehouse</span>
-                  </div>
-                  <div className="flex items-center text-gray-600">
-                    <RotateCcw className="w-5 h-5 text-gray-600 mr-3" />
-                    <span>30-day return policy</span>
-                  </div>
-                </div>
 
-                <div className="mt-6 pt-6 border-t">
-                  <label className="flex items-center space-x-3 cursor-pointer">
-                    <input type="checkbox" className="w-4 h-4 rounded" />
-                    <span className="text-sm text-gray-600">Add gift wrap ($5.00)</span>
-                  </label>
+                  <div className="mt-6 pt-6 border-t">
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                      <input type="checkbox" className="w-4 h-4 rounded" />
+                      <span className="text-sm text-gray-600">Add gift wrap ($5.00)</span>
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
+           
+
           </div>
-
-        </div>
         </div>
 
-  
+
         {relatedProducts.length > 0 && (
           <div className="container mx-auto px-4 mb-16">
             <div className="flex items-center justify-between mb-8">
@@ -289,7 +289,7 @@ export function ProductDetailsPage() {
           </div>
         )}
       </div>
-      
+
     </>
   );
 }

@@ -203,25 +203,7 @@ export function ProductDetailsPage() {
                 </ul>
               </div>
 
-              <div className="border-t pt-6">
-                <h3 className="font-semibold text-lg mb-4 text-gray-900">Product Details</h3>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <dt className="text-gray-600">Category</dt>
-                    <dd className="font-medium capitalize text-gray-900">{product.category}</dd>
-                  </div>
-                  <div className="mb-6">
-                    <div className="flex items-center text-green-600 font-semibold mb-2">
-                      <Check className="w-5 h-5 mr-2" />
-                      In Stock
-                    </div>
-                    <div className="text-3xl font-bold text-gray-900 mt-4">
-                      ${getPriceFromId(product.id).toFixed(2)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+    
  </div>
               <div className="lg:col-span-3">
                 <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg sticky top-32">

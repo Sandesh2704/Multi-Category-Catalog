@@ -1,4 +1,4 @@
-// app/product/[id]/page.tsx
+
 'use client';
 
 import { useParams } from 'next/navigation';
@@ -14,7 +14,6 @@ import { Item } from '@/types/types';
 import { itemsWithId, groupedData } from '@/lib/utils';
 
 function getPriceFromId(id?: string | number | null): number {
-  // Deterministic hash-based price generator (pure function)
   if (id === undefined || id === null) return 0;
   const str = String(id);
   let hash = 0;
@@ -23,7 +22,6 @@ function getPriceFromId(id?: string | number | null): number {
   }
   const min = 50;
   const max = 150;
-  // Normalize hash to [0,1)
   const normalized = (hash % 100000) / 100000;
   return min + normalized * (max - min);
 }
@@ -54,7 +52,6 @@ export function ProductDetailsPage() {
     setError(null);
     
     try {
-      // Find product by id from itemsWithId
       const foundProduct = itemsWithId.find(item => item.id === id);
       
       if (!foundProduct) {
@@ -80,7 +77,6 @@ export function ProductDetailsPage() {
 
   useEffect(() => {
     if (id) {
-      // Defer the fetch to the next microtask to avoid calling setState synchronously inside the effect
       Promise.resolve().then(() => {
         fetchProductData();
       });
@@ -93,7 +89,7 @@ export function ProductDetailsPage() {
 
   return (
     <>
-      {/* Hero Banner */}
+   
       <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8">
         <div className="container mx-auto px-4 z-10">
           <div className="flex items-center justify-between">
@@ -119,7 +115,6 @@ export function ProductDetailsPage() {
         </div>
       </div>
 
-      {/* Breadcrumbs */}
       <div className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 py-3">
           <nav className="flex items-center space-x-2 text-sm">
@@ -139,14 +134,13 @@ export function ProductDetailsPage() {
       <div className="bg-gradient-to-br from-gray-50 to-gray-100 pb-4">
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
-            {/* Left Column - Image Gallery */}
+     
             <div className="lg:col-span-5 space-y-4">
               <div className="sticky top-32">
                 <ProductImages images={product.image} productName={product.itemname} />
               </div>
             </div>
 
-            {/* Middle Column - Product Details */}
             <div className="lg:col-span-4 space-y-6">
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-600">
@@ -174,7 +168,7 @@ export function ProductDetailsPage() {
                 </span>
               </div>
 
-              {/* Specifications Section */}
+             
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h3 className="font-semibold text-lg mb-4 text-gray-900">Specifications</h3>
                 <div className="space-y-3">
@@ -228,7 +222,7 @@ export function ProductDetailsPage() {
               </div>
             </div>
 
-            {/* Right Column - Buy Box */}
+      
             <div className="lg:col-span-3">
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg sticky top-32">
                 <div className="mb-6">
@@ -277,7 +271,7 @@ export function ProductDetailsPage() {
         </div>
         </div>
 
-        {/* Related Products - Same Category */}
+  
         {relatedProducts.length > 0 && (
           <div className="container mx-auto px-4 mb-16">
             <div className="flex items-center justify-between mb-8">
